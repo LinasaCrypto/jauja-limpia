@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAUJA LIMPIA - Reportes Ciudadanos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="assets/logo/logo.png" alt="JAUJA LIMPIA Logo" class="logo">
+            <div class="brand-info">
+                <h1 class="title">JAUJA LIMPIA</h1>
+                <p class="subtitle">Construyendo una ciudad limpia y ordenada para todos</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="banner-section">
+            <div class="banner-content">
+                <h2 class="banner-title">🚮 REPORTE CIUDADANO</h2>
+                <p class="banner-text">Ayúdanos a identificar puntos críticos de residuos y contribuir al cuidado de nuestra ciudad.</p>
+                <img src="assets/illustrations/urban-cleanliness.png" alt="Ilustración de limpieza urbana" class="banner-illustration">
+            </div>
+        </section>
+
+        <section class="form-section">
+            <h2 class="section-title">Formulario de Reporte</h2>
+            <form id="reportForm" class="report-form" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="form-label">Dirección del incidente</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion" class="form-label">Descripción del problema</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo" class="form-label">Tipo de incidente</label>
+                    <select id="tipo" name="tipo" class="form-control" required>
+                        <option value="">Seleccione una opción...</option>
+                        <option value="basura">Basura en vía pública</option>
+                        <option value="contenedor">Contenedor lleno</option>
+                        <option value="acumulación">Acumulación de residuos</option>
+                        <option value="falta">Falta de limpieza</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fotografía</label>
+                    <div class="file-upload">
+                        <input type="file" id="foto" name="foto" class="file-input" accept=".jpg,.jpeg,.png,.webp" multiple>
+                        <div class="file-upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p class="file-upload-text">Haz clic para subir imágenes o arrastra archivos</p>
+                            <p class="file-upload-hint">Formatos aceptados: JPG, PNG, WEBP</p>
+                        </div>
+                    </div>
+                    <div id="preview-container" class="preview-container"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Ubicación</label>
+                    <div class="location-container">
+                        <div class="manual-location">
+                            <label for="ubicacionManual" class="location-label">Ubicación manual:</label>
+                            <input type="text" id="ubicacionManual" name="ubicacionManual" class="form-control" placeholder="Ingrese la dirección o punto de referencia">
+                        </div>
+                        <button type="button" id="btnGps" class="gps-button">
+                            <i class="fas fa-map-marker-alt"></i> Obtener ubicación GPS
+                        </button>
+                        <div id="coordenadas" class="coordenadas-display">
+                            <p>Coordenadas: <span id="coordsText">No disponibles</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fecha y Hora</label>
+                    <div class="datetime-display">
+                        <div class="datetime-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span id="fechaActual">00/00/0000</span>
+                            <label>Fecha</label>
+                        </div>
+                        <div class="datetime-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="horaActual">00:00:00</span>
+                            <label>Hora</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <span>🚀 ENVIAR REPORTE</span>
+                </button>
+            </form>
+        </section>
+
+        <section class="stats-section">
+            <h2 class="section-title">Estadísticas de la Plataforma</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalReportes">0</h3>
+                        <p>Reportes recibidos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalFotos">0</h3>
+                        <p>Fotografías cargadas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalCiudadanos">0</h3>
+                        <p>Ciudadanos participantes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalZonas">0</h3>
+                        <p>Zonas reportadas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">JAUJA LIMPIA</h3>
+            <p class="footer-text">Proyecto de participación ciudadana para el cuidado ambiental.</p>
+            <p class="footer-copyright">© 2026</p>
+        </div>
+    </footer>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h2 class="modal-title">¡REPORTE REGISTRADO!</h2>
+            <p class="modal-message">Gracias por ayudar a mantener limpia nuestra querida ciudad de Jauja.</p>
+            <p class="modal-message">Tu participación fortalece la cultura ambiental y contribuye al bienestar de toda la comunidad.</p>
+            <p class="modal-message">🌱 Juntos construimos una Jauja más limpia, ordenada y sostenible.</p>
+            <button id="closeModal" class="modal-button">Entendido</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
